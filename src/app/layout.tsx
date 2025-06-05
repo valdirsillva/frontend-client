@@ -1,9 +1,27 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from './providers'
+import localFont from 'next/font/local'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = localFont({
+  src: [
+    {
+      path: '../../public/fonts/poppins-v12-latin-300.woff2',
+      weight: '300',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/poppins-v12-latin-regular.woff2',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/poppins-v12-latin-600.woff2',
+      weight: '600',
+      style: 'normal'
+    }
+  ]
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <StyledComponentsRegistry>
           <Providers>{children}</Providers>
         </StyledComponentsRegistry>
