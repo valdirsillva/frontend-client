@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react'
-import { ShoppingCart } from 'lucide-react'
+import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 import Button from '.'
 
 export default {
@@ -26,5 +26,5 @@ export const withIcon: StoryFn = (args) => <Button {...args} />
 Default.args = {
   size: 'small',
   children: 'By now',
-  icon: <ShoppingCart />
+  icon: <AddShoppingCart />
 }
