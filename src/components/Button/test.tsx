@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { ShoppingCart } from 'lucide-react'
+import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 import { renderWithTheme } from '@/utils/tests/helpers'
 import Button from '.'
 
@@ -45,7 +45,7 @@ describe('<Button />', () => {
 
   it('should render a fullWidth version ', () => {
     renderWithTheme(
-      <Button icon={<ShoppingCart data-testid="icon" />}>Buy now</Button>
+      <Button icon={<AddShoppingCart data-testid="icon" />}>Buy now</Button>
     )
 
     expect(screen.getByText(/buy now/i)).toBeInTheDocument()
