@@ -1,8 +1,6 @@
 import { screen } from '@testing-library/react'
-import 'jest-styled-components'
-
-import Heading from '.'
 import { renderWithTheme } from '@/utils/tests/helpers'
+import Heading from '.'
 
 describe('<Heading />', () => {
   it('should render a white heading by default', () => {
