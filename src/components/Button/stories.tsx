@@ -28,3 +28,12 @@ Default.args = {
   children: 'By now',
   icon: <AddShoppingCart />
 }
+
+export const asLink: StoryFn = (args) => <Button {...args} />
+
+asLink.args = {
+  size: 'large',
+  children: 'By now',
+  as: 'a',
+  href: '/link'
+}
