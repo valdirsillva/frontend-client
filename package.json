@@ -19,6 +19,7 @@
     "@styled-icons/material-outlined": "^10.47.0",
     "@styled-icons/remix-fill": "^10.46.0",
     "next": "14.1.0",
+    "polished": "^4.3.1",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.18",
