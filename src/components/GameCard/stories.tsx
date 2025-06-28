@@ -11,6 +11,9 @@ export default {
     developer: 'Rockstart Games',
     img: '/img/red-dead-img.jpg'
   },
+  argTypes: {
+    onFav: { action: 'clicked' }
+  },
   parameters: {
     backgrounds: {
       default: 'dark'
