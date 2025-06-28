@@ -12,7 +12,10 @@ export default {
     img: '/img/red-dead-img.jpg'
   },
   argTypes: {
-    onFav: { action: 'clicked' }
+    onFav: { action: 'clicked' },
+    ribbon: {
+      type: 'string'
+    }
   },
   parameters: {
     backgrounds: {
@@ -26,3 +29,15 @@ export const Default: StoryFn<GameCardProps> = (args) => (
     <GameCard {...args} />
   </div>
 )
+
+export const WithRibbon: StoryFn<GameCardProps> = (args) => (
+  <div style={{ maxWidth: '30rem' }}>
+    <GameCard {...args} />
+  </div>
+)
+
+WithRibbon.args = {
+  ribbon: '20% OFF',
+  ribbonSize: 'normal',
+  ribbonColor: 'primary'
+}
