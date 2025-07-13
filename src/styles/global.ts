@@ -1,12 +1,10 @@
-import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 type GlobalStylesProps = {
   removeBg?: boolean
 }
 
-const GlobalStyles = createGlobalStyle<
-  GlobalStylesProps & { theme: DefaultTheme }
->`
+const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
   @font-face {
     font-family: 'Poppins';
     font-style: normal;
