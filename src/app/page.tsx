@@ -1,5 +1,22 @@
-import Main from '@/components/Main'
+'use client'
 
-export default function Home() {
-  return <Main />
+import Home, { HomeTemplateProps } from './home'
+
+import bannersMock from '../components/BannerSlider/mock'
+import gamesMock from '../components/GameCardSlider/mock'
+import highligthMock from '../components/Highlight/mock'
+
+export default function Index() {
+  const data = {
+    banners: bannersMock,
+    newGames: gamesMock,
+    mostPopularHighlight: highligthMock,
+    mostPopularGames: gamesMock,
+    upcommingGames: gamesMock,
+    upcommingHighligth: highligthMock,
+    upcommingMoreGames: gamesMock,
+    freeGame: gamesMock,
+    freeHighlight: highligthMock
+  } as HomeTemplateProps
+  return <Home {...data} />
 }
