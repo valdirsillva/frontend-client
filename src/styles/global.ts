@@ -4,7 +4,9 @@ type GlobalStylesProps = {
   removeBg?: boolean
 }
 
-const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
+const GlobalStyles: ReturnType<
+  typeof createGlobalStyle<GlobalStylesProps>
+> = createGlobalStyle<GlobalStylesProps>`
   @font-face {
     font-family: 'Poppins';
     font-style: normal;
@@ -53,7 +55,7 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.medium};
 
-      ${!!removeBg &&
+      ${!removeBg &&
       css`
         background-color: ${theme.colors.mainBg};
       `}
