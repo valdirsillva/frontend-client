@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-        
+
       # 1. Cria setup Node
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -17,11 +17,14 @@ jobs:
       # . Etapa de instalação dependencia do projeto
       - name: Install dependencies
         run: npm install
-      
+
       # 3. Faz etapa de linting no código
       - name: Linting
         run: npm run lint
-      
+
+      - name: Typecheck
+        run: npm run typecheck
+
       # 4. Faz etapa de linting no códigoexecução dos testes unitários/e2e
       - name: Testing
         run: npm run test
@@ -29,4 +32,3 @@ jobs:
       # 5. Faz etapa de build
       - name: Build
         run: npm run build
-

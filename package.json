@@ -11,6 +11,7 @@
     "test:ci": "jest --runInBand",
     "generate": "npx plop --plopfile generators/plopfile.js",
     "lint": "next lint",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
