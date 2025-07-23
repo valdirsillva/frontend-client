@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react'
 import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 import { renderWithTheme } from '@/utils/tests/helpers'
 import Button from '.'
+import { backgroundImages } from 'polished'
 
 describe('<Button />', () => {
   it('should render the medium size by default ', () => {
@@ -43,13 +44,34 @@ describe('<Button />', () => {
     })
   })
 
-  it('should render a fullWidth version ', () => {
+  it('should render an icon version ', () => {
     renderWithTheme(
       <Button icon={<AddShoppingCart data-testid="icon" />}>Buy now</Button>
     )
 
     expect(screen.getByText(/buy now/i)).toBeInTheDocument()
     expect(screen.getByTestId('icon')).toBeInTheDocument()
+  })
+
+  it('should render a minimal version ', () => {
+    renderWithTheme(
+      <Button icon={<AddShoppingCart data-testid="icon" />} minimal>
+        Buy now
+      </Button>
+    )
+
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyle({
+      background: 'none',
+      color: '#F231A5'
+    })
+
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyleRule(
+      'background',
+      'none',
+      {
+        modifier: ':hover'
+      }
+    )
   })
 
   it('should render Button has a link ', () => {
