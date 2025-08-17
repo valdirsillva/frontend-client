@@ -80,4 +80,16 @@ describe('<TextField />', () => {
     })
     expect(onInput).toHaveBeenCalledWith(text)
   })
+
+  it('should render with Icon on the left side', () => {
+    renderWithTheme(<TextField icon={<Email data-testid="icon" />} />)
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 0 })
+  })
+
+  it('should render with Icon on the right side', () => {
+    renderWithTheme(
+      <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
+    )
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
+  })
 })
