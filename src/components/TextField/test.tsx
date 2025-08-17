@@ -6,13 +6,13 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render with Label', () => {
-    renderWithTheme(<TextField label="Label" labelFor="Field" id="Field" />)
+    renderWithTheme(<TextField label="Label" name="Field" id="Field" />)
     // TextField com o label="Label"
     expect(screen.getByLabelText('Label')).toBeInTheDocument()
   })
 
   it('should render without Label', () => {
-    renderWithTheme(<TextField labelFor="Field" id="Field" />)
+    renderWithTheme(<TextField name="Field" id="Field" />)
     // TextField sem label="Label"
     expect(screen.queryByLabelText('Label')).not.toBeInTheDocument()
   })
@@ -47,7 +47,7 @@ describe('<TextField />', () => {
 
   it('Should is accessible by tab', async () => {
     renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />
+      <TextField label="TextField" name="TextField" id="TextField" />
     )
 
     const input = screen.getByLabelText('TextField')
@@ -91,5 +91,29 @@ describe('<TextField />', () => {
       <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
     )
     expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
+  })
+
+  it('should is accessible by tab', async () => {
+    const user = userEvent.setup() // importante para foco/tab
+
+    renderWithTheme(<TextField label="TextField" name="TextField" />)
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    await user.tab()
+    expect(input).toHaveFocus()
+  })
+
+  it('should ss not accessible by tab when disabled', async () => {
+    const user = userEvent.setup() // importante para foco/tab
+
+    renderWithTheme(<TextField label="TextField" name="TextField" disabled />)
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    await user.tab()
+    expect(input).not.toHaveFocus()
   })
 })
