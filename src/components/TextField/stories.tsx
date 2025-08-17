@@ -27,3 +27,13 @@ export const Default: StoryFn<TextFieldProps> = (args) => (
     <TextField {...args} />
   </div>
 )
+
+export const withError: StoryFn<TextFieldProps> = (args) => (
+  <div style={{ maxWidth: 300, padding: 15 }}>
+    <TextField {...args} />
+  </div>
+)
+
+withError.args = {
+  error: 'Ops...something is wrong'
+}

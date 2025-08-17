@@ -105,7 +105,21 @@ describe('<TextField />', () => {
     expect(input).toHaveFocus()
   })
 
-  it('should ss not accessible by tab when disabled', async () => {
+  it('should renders with error', () => {
+    const { container } = renderWithTheme(
+      <TextField
+        icon={<Email data-testid="icon" />}
+        label="TextField"
+        error="Error message"
+      />
+    )
+
+    expect(screen.getByText('Error message')).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('should not accessible by tab when disabled', async () => {
     const user = userEvent.setup() // importante para foco/tab
 
     renderWithTheme(<TextField label="TextField" name="TextField" disabled />)
