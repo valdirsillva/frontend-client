@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { Email, Lock } from '@styled-icons/material-outlined'
 import TextField from '../TextField'
@@ -30,7 +31,7 @@ const FormSignIn = () => (
       </Button>
 
       <FormLink>
-        Ainda não tem uma conta? <Link href="/sign-up">Cadastre-se</Link>
+        Ainda não tem uma conta? <Link href="/signup">Cadastre-se</Link>
       </FormLink>
     </form>
   </FormWrapper>

@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import Button from '../Button'
 import TextField from '../TextField'
@@ -41,7 +42,7 @@ const FormSignUp = () => (
       </Button>
 
       <FormLink>
-        Já tem uma conta? <Link href="/sign-in">Entrar</Link>
+        Já tem uma conta? <Link href="/signin">Entrar</Link>
       </FormLink>
     </form>
   </FormWrapper>

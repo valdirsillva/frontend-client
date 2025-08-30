@@ -10,7 +10,6 @@ type AuthProps = {
 }
 
 const Auth = ({ title, children }: AuthProps) => {
-  console.log(children)
   return (
     <S.Wrapper>
       <S.BannerBlock>
