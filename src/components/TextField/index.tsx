@@ -6,7 +6,6 @@ export type IconPosition = 'left' | 'right'
 export type TextFieldProps = {
   size?: 'small' | 'medium' | 'large'
   label?: string
-  labelFor?: string
   onInput?: (value: string) => void
   initialValue?: string
   icon?: React.ReactNode

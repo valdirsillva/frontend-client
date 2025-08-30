@@ -11,6 +11,7 @@ export type GameCardSliderProps = {
 }
 
 const settings: SliderSettings = {
+  arrows: true,
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',

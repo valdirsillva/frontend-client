@@ -26,12 +26,7 @@ describe('<TextField />', () => {
   it('should changes its value when typing', async () => {
     const onInput = jest.fn()
     renderWithTheme(
-      <TextField
-        onInput={onInput}
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-      />
+      <TextField onInput={onInput} label="TextField" id="TextField" />
     )
 
     const input = screen.getByRole('textbox')
