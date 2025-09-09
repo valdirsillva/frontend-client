@@ -7,7 +7,7 @@ export type HighlightProps = {
   floatImage?: string // opcional
   backgroundImage: string
   buttonLabel: string
-  buttonLink: string
+  buttonLink?: string
   alignment?: 'right' | 'left'
 }
 
