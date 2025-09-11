@@ -79,8 +79,8 @@ const Menu = ({ username }: MenuProps) => {
               </Button>
             </Link>
             <span>or</span>
-            <Link href="/signun" passHref>
-              <S.CreateAccount href="#" title="Sign In" as="a">
+            <Link href="/signup" passHref>
+              <S.CreateAccount href="#" title="Sign Up" as="a">
                 Sign Up
               </S.CreateAccount>
             </Link>
