@@ -17,6 +17,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@styled-icons/fa-brands": "^10.47.0",
     "@styled-icons/material-outlined": "^10.47.0",
     "@styled-icons/remix-fill": "^10.46.0",
     "@types/react-slick": "^0.23.13",
