@@ -1,4 +1,4 @@
-export default [
+const mock = [
   {
     img: 'https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg',
     title: 'Defy death 1',
@@ -22,3 +22,5 @@ export default [
     buttonLink: '/games/defy-death'
   }
 ]
+
+export default mock
