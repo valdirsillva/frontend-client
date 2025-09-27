@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
+import { StoryFn } from '@storybook/react'
 
 export const parameters = {
   backgrounds: {
@@ -19,7 +20,7 @@ export const parameters = {
 }
 
 export const decorators = [
-  (Story) => (
+  (Story: StoryFn) => (
     <ThemeProvider theme={theme}>
       <GlobalStyles removeBg />
       <Story />
