@@ -6,6 +6,7 @@ import { renderWithTheme } from '@/utils/tests/helpers'
 const props: GameDetailsProps = {
   developer: 'Different Tales',
   platforms: ['windows', 'mac', 'linux'],
+  publisher: 'Walktrough',
   releaseDate: '2020-11-21T23:00:00',
   rating: 'BR0',
   genres: ['Role-playing', 'Narrative']
@@ -50,6 +51,12 @@ describe('<GameDetails />', () => {
     renderWithTheme(<GameDetails {...props} />)
 
     expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
+  it('should render the publisher', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/Walktrough/i)).toBeInTheDocument()
   })
 
   it('should 18+ rating when BR18', () => {
