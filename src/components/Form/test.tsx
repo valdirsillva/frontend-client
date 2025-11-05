@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FormLink, FormWrapper } from '.'
 import { renderWithTheme } from '@/utils/tests/helpers'
 
@@ -6,7 +7,7 @@ describe('<Form />', () => {
     const { container } = renderWithTheme(
       <FormWrapper>
         <FormLink>
-          My nice <a href="#">link</a>
+          My nice <Link href="#">link</Link>
         </FormLink>
       </FormWrapper>
     )

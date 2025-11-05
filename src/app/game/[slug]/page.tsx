@@ -1,4 +1,4 @@
-import GameComponent, { GameTemplateProps } from '../../template/game'
+import GameComponent, { GameTemplateProps } from '../../templates/Game'
 import galleryMock from '@/components/Gallery/mock'
 import gamesMock from '@/components/GameCardSlider/mock'
 import highlightMock from '@/components/Highlight/mock'
