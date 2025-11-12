@@ -1,4 +1,3 @@
-
 module.exports = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
@@ -22,7 +21,8 @@ module.exports = {
   // we should to force it to use the browser version
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^styled-components': 'styled-components/dist/styled-components.browser.cjs.js'
+    '^styled-components':
+      'styled-components/dist/styled-components.browser.cjs.js'
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx']
 }
