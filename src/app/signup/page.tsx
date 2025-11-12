@@ -1,7 +1,7 @@
 import FormSignUp from '@/components/FormSignUp'
 import Auth from '../auth/auth'
 
-export default function SignUp() {
+export default function SignUpPage() {
   return (
     <Auth title="Sign Up">
       <FormSignUp />

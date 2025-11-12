@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   ]
 }
 
-export default function Game() {
+export default function GamePage() {
   const descriptionHTML = `
     <img src="https://items.gog.com/not_a_cp/ENG_product-page-addons-2020_yellow_on_black.png"><br>
     * Exclusive Digital Comic - Cyberpunk 2077: Big City Dreams will be available in English only.
