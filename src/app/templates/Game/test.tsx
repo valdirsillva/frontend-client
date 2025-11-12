@@ -21,35 +21,35 @@ const props: GameTemplateProps = {
   recommendedGames: gamesMock
 }
 
-jest.mock('components/Menu', () => ({
+jest.mock('@/components/Menu', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock Menu" />
   }
 }))
 
-jest.mock('components/Gallery', () => ({
+jest.mock('@/components/Gallery', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock Gallery" />
   }
 }))
 
-jest.mock('components/GameDetails', () => ({
+jest.mock('@/components/GameDetails', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock GameDetails" />
   }
 }))
 
-jest.mock('components/GameInfo', () => ({
+jest.mock('@/components/GameInfo', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock GameInfo" />
   }
 }))
 
-jest.mock('components/Showcase', () => ({
+jest.mock('@/components/Showcase', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock Showcase" />

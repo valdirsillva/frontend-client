@@ -1,7 +1,7 @@
 import { Container } from '@/components/Container'
 import * as S from './styles'
 import Menu from '@/components/Menu'
-import Footer from '../../components/Footer'
+import Footer from '../../../components/Footer'
 
 export type BaseTemplateProps = {
   children: React.ReactNode

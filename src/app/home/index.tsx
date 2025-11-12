@@ -6,7 +6,7 @@ import BannerSlider from '@/components/BannerSlider'
 import { Container } from '@/components/Container'
 import Showcase from '../../components/Showcase'
 import * as S from './styles'
-import Base from '../base'
+import Base from '../templates/base'
 
 export type HomeTemplateProps = {
   banners: BannerProps[]

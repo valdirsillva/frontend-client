@@ -1,12 +1,12 @@
 
 const mock = [
   {
-    img: 'https://source.unsplash.com/user/willianjusten/151x70',
+    img: '/img/games/cyberpunk-1.jpg',
     title: 'Red Dead Redemption 2',
     price: 'R$ 215,00'
   },
   {
-    img: 'https://source.unsplash.com/user/willianjusten/151x70',
+    img: '/img/games/cyberpunk-1.jpg',
     title: 'Borderlands 3',
     price: 'R$ 215,00'
   }

@@ -113,7 +113,7 @@ exports[`<CartList /> should render the cart list 1`] = `
           decoding="async"
           height="240"
           loading="lazy"
-          src="https://source.unsplash.com/user/willianjusten/151x70"
+          src="/img/games/cyberpunk-1.jpg"
           style="color: transparent;"
           width="240"
         />
@@ -149,7 +149,7 @@ exports[`<CartList /> should render the cart list 1`] = `
           decoding="async"
           height="240"
           loading="lazy"
-          src="https://source.unsplash.com/user/willianjusten/151x70"
+          src="/img/games/cyberpunk-1.jpg"
           style="color: transparent;"
           width="240"
         />

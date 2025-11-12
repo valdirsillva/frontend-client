@@ -1,6 +1,6 @@
 'use client'
 
-import Base from '@/app/base'
+import Base from '@/app/templates/base'
 import Heading from '@/components/Heading'
 import { Divider } from '@/components/Divider'
 import { Container } from '@/components/Container'

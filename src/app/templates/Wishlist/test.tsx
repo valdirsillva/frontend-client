@@ -13,7 +13,7 @@ const props = {
   recommendedHighlight: highlightMock
 }
 
-jest.mock('components/Showcase', () => ({
+jest.mock('@/components/Showcase', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock Showcase" />

@@ -3,9 +3,9 @@ import { screen } from '@testing-library/react'
 import Home, { HomeTemplateProps } from '.'
 import { renderWithTheme } from '@/utils/tests/helpers'
 
-import bannersMock from '../../components/BannerSlider/mock'
-import gamesMock from '../../components/GameCardSlider/mock'
-import highligthMock from '../../components/Highlight/mock'
+import bannersMock from '@/components/BannerSlider/mock'
+import gamesMock from '@/components/GameCardSlider/mock'
+import highligthMock from '@/components/Highlight/mock'
 
 const props = {
   banners: bannersMock,
@@ -19,7 +19,7 @@ const props = {
   freeHighlight: highligthMock
 } as HomeTemplateProps
 
-jest.mock('components/Showcase', () => {
+jest.mock('@/components/Showcase', () => {
   return {
     __esModule: true,
     default: function Mock() {
@@ -28,7 +28,7 @@ jest.mock('components/Showcase', () => {
   }
 })
 
-jest.mock('components/BannerSlider', () => {
+jest.mock('@/components/BannerSlider', () => {
   return {
     __esModule: true,
     default: function Mock() {

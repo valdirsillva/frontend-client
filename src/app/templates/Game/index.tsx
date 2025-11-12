@@ -1,5 +1,5 @@
 'use client'
-import Base from "@/app/base"
+import Base from "@/app/templates/base"
 import GameInfo, { GameInfoProps } from "@/components/GameInfo"
 import Gallery, { GalleryImageProps } from "@/components/Gallery"
 import GameDetails, { GameDetailsProps } from "@/components/GameDetails"
