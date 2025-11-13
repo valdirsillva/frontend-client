@@ -32,14 +32,14 @@ describe('<GameItem />', () => {
   it('should render the payment info', () => {
     const paymentInfo = {
       flag: 'mastercard',
-      img: '/img/cards/master-card.png',
+      img: '/img/cards/mastercard.png',
       number: '**** **** **** 4326',
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
 
     renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
 
-    expect(screen.getByRole('img', { name: paymentInfo.img })).toHaveAttribute(
+    expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
       'src', paymentInfo.img
     )
 

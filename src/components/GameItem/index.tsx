@@ -22,7 +22,14 @@ const GameItem = ({ img, title, price, downloadLink, paymentInfo }: GameItemProp
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
-        <Image src={img} alt={title} width={240} height={240} unoptimized />
+        <Image
+          role='img'
+          src={img}
+          alt={title}
+          width={240}
+          height={240}
+          unoptimized
+        />
       </S.ImageBox>
       <S.Content>
         <S.Title>
@@ -47,7 +54,14 @@ const GameItem = ({ img, title, price, downloadLink, paymentInfo }: GameItemProp
 
         <S.CardInfo>
           <span>{paymentInfo.number}</span>
-          <Image src={paymentInfo.img} alt={paymentInfo.flag} unoptimized />
+          <Image
+            role='img'
+            src={paymentInfo.img}
+            alt={paymentInfo.flag}
+            width={38}
+            height={24}
+            unoptimized
+          />
         </S.CardInfo>
       </S.PaymentContent>
     )}
