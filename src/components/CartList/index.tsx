@@ -8,7 +8,7 @@ export type CartListProps = {
 
 const CartList = ({ items, total }: CartListProps) => (
   <S.Wrapper>
-    {items.map((item) => (
+    {items?.map((item) => (
       <GameItem key={item.title} {...item} />
     ))}
 
