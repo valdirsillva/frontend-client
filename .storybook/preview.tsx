@@ -1,4 +1,6 @@
-import type { Preview } from '@storybook/experimental-nextjs-vite';
+// import type { Preview } from '@storybook/experimental-nextjs-vite';
+import type { Preview } from '@storybook/react';
+
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '../src/styles/global';
 import theme from '../src/styles/theme';
