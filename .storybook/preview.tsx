@@ -1,29 +1,32 @@
-import { ThemeProvider } from 'styled-components'
-import GlobalStyles from '../src/styles/global'
-import theme from '../src/styles/theme'
-import { StoryFn } from '@storybook/react'
+import type { Preview } from '@storybook/experimental-nextjs-vite';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from '../src/styles/global';
+import theme from '../src/styles/theme';
 
-export const parameters = {
-  backgrounds: {
-    default: 'won-light',
-    values: [
-      {
-        name: 'won-light',
-        value: theme.colors.white
-      },
-      {
-        name: 'won-dark',
-        value: theme.colors.mainBg
-      }
-    ]
-  }
-}
+const preview: Preview = {
+  parameters: {
+    backgrounds: {
+      default: 'won-light',
+      values: [
+        {
+          name: 'won-light',
+          value: theme.colors.white
+        },
+        {
+          name: 'won-dark',
+          value: theme.colors.mainBg
+        }
+      ]
+    }
+  },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <GlobalStyles removeBg />
+        <Story />
+      </ThemeProvider>
+    )
+  ]
+};
 
-export const decorators = [
-  (Story: StoryFn) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles removeBg />
-      <Story />
-    </ThemeProvider>
-  )
-]
+export default preview;

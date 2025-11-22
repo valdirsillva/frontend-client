@@ -1,4 +1,5 @@
-import type { StorybookConfig } from '@storybook/nextjs'
+import path from 'path'
+import type { StorybookConfig } from '@storybook/experimental-nextjs-vite';
 
 const config: StorybookConfig = {
   staticDirs: ['../public'],
@@ -10,16 +11,28 @@ const config: StorybookConfig = {
     '@storybook/experimental-addon-test'
   ],
   framework: {
-    name: '@storybook/nextjs',
+    // name: '@storybook/nextjs',
+    name: '@storybook/experimental-nextjs-vite',
     options: {}
   },
 
   docs: {
     autodocs: true
   },
-  webpackFinal: (config) => {
-    config.resolve?.modules?.push(`${process.cwd()}/src`)
-    return config
+  // webpackFinal: (config) => {
+  //   config.resolve?.modules?.push(`${process.cwd()}/src`)
+  //   return config
+  // }
+
+  viteFinal: async (config) => {
+    config.resolve = config.resolve || {};
+
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, '../src'),
+    };
+
+    return config;
   }
 }
 export default config
