@@ -34,11 +34,12 @@ describe('<Checkbox />', () => {
     // jest.fn() é um mock de uma função
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
+    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} />)
     // Espero que a função NÃO seja chamada
     expect(onCheck).not.toHaveBeenCalled()
 
     userEvent.click(screen.getByRole('checkbox'))
+
     await waitFor(() => {
       // Espero que a função seja chamada 1 vez
       expect(onCheck).toHaveBeenCalledTimes(1)
@@ -46,14 +47,13 @@ describe('<Checkbox />', () => {
     expect(onCheck).toHaveBeenCalledWith(true)
   })
 
-  it('should dispatch onCheck when status changes', async () => {
-    // jest.fn() é um mock de uma função
+  it('should call onCheck with false if the Checkbox is already checked', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} />)
-    expect(onCheck).not.toHaveBeenCalled()
+    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
 
     userEvent.click(screen.getByRole('checkbox'))
+
     await waitFor(() => {
       expect(onCheck).toHaveBeenCalledTimes(1)
     })
