@@ -28,7 +28,6 @@ const Checkbox = ({
     onCheck?.(status)
   }
 
-
   return (
     <S.Wrapper>
       <S.Input
