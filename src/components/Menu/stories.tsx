@@ -14,3 +14,9 @@ Default.parameters = {
     default: 'won-dark'
   }
 }
+
+export const Logged: StoryFn<MenuProps> = (args) => <Menu {...args} />
+
+Logged.args = {
+  username: 'Jhon Doe'
+}

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Wrapper as CartWrapperStyles } from '../Heading/styles'
+import { Wrapper as CartWrapperStyles } from '@/components/CartList/styles'
 
 export const Wrapper = styled.div`
   ${CartWrapperStyles} {

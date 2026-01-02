@@ -4,10 +4,11 @@ import * as S from './styles'
 import Logo from '../Logo'
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Search as SearchIcon } from '@styled-icons/material-outlined/Search'
-import { ShoppingCart as ShoppingCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from '../Button'
 import MediaMatch from '../MediaMatch'
+import CartDropdown from '../CartDropdown'
+import UserDropdown from '../UserDropdown'
 
 export type MenuProps = {
   username?: string
@@ -35,7 +36,9 @@ const Menu = ({ username }: MenuProps) => {
           <Link href="/">
             <S.MenuLink>Home</S.MenuLink>
           </Link>
-          <S.MenuLink href="#">Explore</S.MenuLink>
+          <Link href="/games">
+            <S.MenuLink>Explore</S.MenuLink>
+          </Link>
           {!!username && (
             <Fragment>
               <S.MenuLink href="#">Wishlist</S.MenuLink>
@@ -49,16 +52,27 @@ const Menu = ({ username }: MenuProps) => {
           <SearchIcon aria-label="Search" />
         </S.IconWrapper>
         <S.IconWrapper>
-          <ShoppingCartIcon aria-label="Open Shopping Cart" />
+
+          <MediaMatch greaterThan="medium">
+            <CartDropdown />
+          </MediaMatch>
+
+          <MediaMatch lessThan="medium">
+            <Link href="/cart" passHref>
+              <CartDropdown />
+            </Link>
+          </MediaMatch>
         </S.IconWrapper>
 
-        {!username && (
-          <MediaMatch greaterThan="medium">
+        <MediaMatch greaterThan="medium">
+          {!username ? (
             <Link href="/signin" passHref>
               <Button as="a">Sign in</Button>
             </Link>
-          </MediaMatch>
-        )}
+          ) : (
+            <UserDropdown username={username} />
+          )}
+        </MediaMatch>
       </S.MenuGroup>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
@@ -68,11 +82,17 @@ const Menu = ({ username }: MenuProps) => {
           <Link href="/">
             <S.MenuLink>Home</S.MenuLink>
           </Link>
-          <S.MenuLink href="#">Explore</S.MenuLink>
+          <Link href="/games">
+            <S.MenuLink>Explore</S.MenuLink>
+          </Link>
           {!!username && (
             <Fragment>
-              <S.MenuLink href="#">My account</S.MenuLink>
-              <S.MenuLink href="#">Wishlist</S.MenuLink>
+              <Link href="/profile/me">
+                <S.MenuLink>My profile</S.MenuLink>
+              </Link>
+              <Link href="/profile/wishlist">
+                <S.MenuLink>Wishlist</S.MenuLink>
+              </Link>
             </Fragment>
           )}
         </S.MenuNav>
