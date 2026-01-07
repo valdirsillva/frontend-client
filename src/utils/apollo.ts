@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 import { useMemo } from 'react'
 
@@ -12,7 +13,7 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState: Record<string, unknown> = {}) {
+export function initializeApollo(initialState = {}) {
   // Serve para verificar se já existe um client criado, para não criar vários instances
   const _apolloClient = apolloClient ?? createApolloClient()
 
@@ -31,7 +32,7 @@ export function initializeApollo(initialState: Record<string, unknown> = {}) {
   return _apolloClient
 }
 
-export function useApollo(initialState?: Record<string, unknown>) {
+export function useApollo(initialState = {}) {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

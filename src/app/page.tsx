@@ -1,5 +1,4 @@
 'use client'
-
 import { gql } from '@apollo/client'
 
 import Home, { HomeTemplateProps } from './home'
@@ -7,10 +6,11 @@ import Home, { HomeTemplateProps } from './home'
 import bannersMock from '../components/BannerSlider/mock'
 import gamesMock from '../components/GameCardSlider/mock'
 import highligthMock from '../components/Highlight/mock'
-import { useQuery } from '@apollo/client/react'
+import { initializeApollo } from '@/utils/apollo'
+import { useEffect, useState } from 'react'
+import { getGames } from './actions/get-games'
 
-export default function Index() {
-  const { data: dados, loading, error } = useQuery(gql`
+const GET_GAMES = gql`
       query Games {
         games {
           data {
@@ -21,15 +21,22 @@ export default function Index() {
           }
         }
       }
-    `)
+    `
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error : {error.message}</p>
+export default function Index() {
+  // const [games, setGames] = useState<any[]>([])
+  // const [loading, setLoading] = useState(true)
 
-  if (dados) return <pre>{JSON.stringify(dados, null, 2)}</pre>
+  // useEffect(() => {
+  //   getGames().then((data) => {
+  //     setGames(data)
+  //     setLoading(false)
+  //   })
+  // }, [])
 
+  // if (loading) return <p>Carregando...</p>
 
-  const data = {
+  const pageData = {
     banners: bannersMock,
     newGames: gamesMock,
     mostPopularHighlight: highligthMock,
@@ -40,5 +47,5 @@ export default function Index() {
     freeGame: gamesMock,
     freeHighlight: highligthMock
   } as HomeTemplateProps
-  return <Home {...data} />
+  return <Home {...pageData} />
 }
