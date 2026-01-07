@@ -1,38 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
-import { useMemo } from 'react'
+import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 
-let apolloClient: ApolloClient | null = null
+let client: ApolloClient<NormalizedCacheObject>
 
-function createApolloClient() {
-  return new ApolloClient({
-    ssrMode: typeof window === 'undefined', // true
-    link: new HttpLink({ uri: 'http://localhost:1337/graphql' }),
-    // Cache para armazenar os dados
-    cache: new InMemoryCache()
-  })
-}
-
-export function initializeApollo(initialState = {}) {
-  // Serve para verificar se já existe um client criado, para não criar vários instances
-  const _apolloClient = apolloClient ?? createApolloClient()
-
-  // recuperando os dados do cache
-  // hidrata o estado inicial
-  if (Object.keys(initialState).length > 0) {
-    _apolloClient.cache.restore(initialState)
+export function getApolloClient() {
+  if (!client) {
+    client = new ApolloClient({
+      ssrMode: false,
+      link: new HttpLink({
+        uri: 'http://localhost:1337/graphql'
+      }),
+      cache: new InMemoryCache()
+    })
   }
 
-  // sempre inicializando no SSR com cache limpo
-  if (typeof window === 'undefined') return _apolloClient
-
-  // Singleton no client
-  if (!apolloClient) apolloClient = _apolloClient
-
-  return _apolloClient
-}
-
-export function useApollo(initialState = {}) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState])
-  return store
+  return client
 }

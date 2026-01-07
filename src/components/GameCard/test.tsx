@@ -5,7 +5,7 @@ import GameCard from '.'
 const props = {
   slug: 'population-zero',
   title: 'Population Zero',
-  price: 'R$ 215,00',
+  price: 215,
   developer: 'Rockstart Games',
   img: '/img/red-dead-img.jpg'
 }
@@ -44,7 +44,7 @@ describe('<GameCard />', () => {
     // Renderizar o componente
     renderWithTheme(<GameCard {...props} />)
 
-    const price = screen.getByText('R$ 215,00')
+    const price = screen.getByText('$215.00')
     // Preço não deve ter o line-through
     expect(price).not.toHaveStyle({ textDecoration: 'line-through' })
     // Preço não deve ter a cor cinza
@@ -55,14 +55,14 @@ describe('<GameCard />', () => {
 
   it('should render a line-through in prine when promotional', () => {
     // Renderizar o componente ( COM o promotionalPrice )
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 15,00" />)
+    renderWithTheme(<GameCard {...props} promotionalPrice={15} />)
 
     // Preço deve ter o line-through (215)
-    expect(screen.getByText('R$ 215,00')).toHaveStyle({
+    expect(screen.getByText('$215.00')).toHaveStyle({
       textDecoration: 'line-through'
     })
     // Preço novo promocional não vai ter o line-through (15, 00)
-    expect(screen.getByText('R$ 15,00')).not.toHaveStyle({
+    expect(screen.getByText('$15.00')).not.toHaveStyle({
       textDecoration: 'line-through'
     })
   })

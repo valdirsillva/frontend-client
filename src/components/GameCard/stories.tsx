@@ -5,9 +5,10 @@ export default {
   title: 'GameCard',
   component: GameCard,
   args: {
+    slug: 'population-zero',
     title: 'Population Zero',
-    price: 'R$ 215,00',
-    promotionalPrice: 'R$ 200,00',
+    price: 215,
+    promotionalPrice: 200,
     developer: 'Rockstart Games',
     img: '/img/red-dead-img.jpg'
   },

@@ -21,11 +21,8 @@ export default function GamesPage() {
           img: attributes.cover?.data?.attributes?.url
             ? `http://localhost:1337${attributes.cover.data.attributes.url}`
             : '/img/placeholder.png',
-          price: new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }).format(attributes.price ?? 0),
-          slug: attributes.slug ?? '',
+          price: attributes.price,
+          // slug: attributes.slug,
         }
       }) ?? []
 

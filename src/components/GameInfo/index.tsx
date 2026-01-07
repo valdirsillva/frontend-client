@@ -6,11 +6,12 @@ import Button from '../Button'
 import Ribbon from '../Ribbon'
 import * as S from './styles'
 import Heading from '../Heading'
+import formatPrice from '@/utils/format-price'
 
 export type GameInfoProps = {
   title: string
   description: string
-  price: string
+  price: number
 }
 
 const GameInfo = ({ title, description, price }: GameInfoProps) => (
@@ -19,7 +20,9 @@ const GameInfo = ({ title, description, price }: GameInfoProps) => (
       {title}
     </Heading>
 
-    <Ribbon color="secondary">`$${price}`</Ribbon>
+    <Ribbon color="secondary">
+      {formatPrice(price)}
+    </Ribbon>
 
     <S.Description>{description}</S.Description>
 

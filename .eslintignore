@@ -1,3 +1,4 @@
 !.storybook
 !.jest
 generators
+src/graphql/generated.ts

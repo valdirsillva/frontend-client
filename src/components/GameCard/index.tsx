@@ -4,14 +4,15 @@ import { AddShoppingCart, Favorite } from '@styled-icons/material-outlined'
 import * as S from './styles'
 import Button from '../Button'
 import Ribbon, { RibbonColors, RibbonSizes } from '../Ribbon'
+import formatPrice from '@/utils/format-price'
 
 export type GameCardProps = {
-  slug: string
+  slug?: string
   title: string
   developer: string
   img: string
-  price: string
-  promotionalPrice?: string
+  price: number
+  promotionalPrice?: number
   favorite?: boolean
   onFav?: () => void
   ribbon?: React.ReactNode
@@ -41,7 +42,12 @@ const GameCard = ({
 
     <Link href={`/game/${slug}`} passHref>
       <S.ImageBox>
-        <img src={img} alt={title} />
+        <img
+          src={img}
+          alt={title}
+          width={300}
+          height={300}
+        />
       </S.ImageBox>
     </Link>
 
@@ -62,8 +68,8 @@ const GameCard = ({
       </S.FavButton>
 
       <S.BuyBox>
-        {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
-        <S.Price>{promotionalPrice || price}</S.Price>
+        {!!promotionalPrice && <S.Price isPromotional>{formatPrice(price)}</S.Price>}
+        <S.Price>{formatPrice(promotionalPrice || price)}</S.Price>
         <Button icon={<AddShoppingCart />} size="small" />
       </S.BuyBox>
     </S.Content>
