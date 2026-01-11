@@ -21,6 +21,58 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export type Banner = {
+  __typename?: 'Banner';
+  button?: Maybe<ComponentPageButton>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  image: UploadFileEntityResponse;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  ribbon?: Maybe<ComponentPageRibbon>;
+  subtitle: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type BannerEntity = {
+  __typename?: 'BannerEntity';
+  attributes?: Maybe<Banner>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type BannerEntityResponse = {
+  __typename?: 'BannerEntityResponse';
+  data?: Maybe<BannerEntity>;
+};
+
+export type BannerEntityResponseCollection = {
+  __typename?: 'BannerEntityResponseCollection';
+  data: Array<BannerEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type BannerFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<BannerFiltersInput>>>;
+  button?: InputMaybe<ComponentPageButtonFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<BannerFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<BannerFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  ribbon?: InputMaybe<ComponentPageRibbonFiltersInput>;
+  subtitle?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type BannerInput = {
+  button?: InputMaybe<ComponentPageButtonInput>;
+  image?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  ribbon?: InputMaybe<ComponentPageRibbonInput>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
@@ -103,6 +155,51 @@ export type CategoryInput = {
 export type CategoryRelationResponseCollection = {
   __typename?: 'CategoryRelationResponseCollection';
   data: Array<CategoryEntity>;
+};
+
+export type ComponentPageButton = {
+  __typename?: 'ComponentPageButton';
+  id: Scalars['ID']['output'];
+  label: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+};
+
+export type ComponentPageButtonFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>;
+  label?: InputMaybe<StringFilterInput>;
+  link?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentPageButtonFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>;
+};
+
+export type ComponentPageButtonInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentPageRibbon = {
+  __typename?: 'ComponentPageRibbon';
+  color?: Maybe<Enum_Componentpageribbon_Color>;
+  id: Scalars['ID']['output'];
+  size?: Maybe<Enum_Componentpageribbon_Size>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentPageRibbonFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>;
+  color?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentPageRibbonFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>;
+  size?: InputMaybe<StringFilterInput>;
+  text?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentPageRibbonInput = {
+  color?: InputMaybe<Enum_Componentpageribbon_Color>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  size?: InputMaybe<Enum_Componentpageribbon_Size>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DateFilterInput = {
@@ -210,6 +307,16 @@ export type DeveloperRelationResponseCollection = {
   __typename?: 'DeveloperRelationResponseCollection';
   data: Array<DeveloperEntity>;
 };
+
+export enum Enum_Componentpageribbon_Color {
+  Primary = 'primary',
+  Secondary = 'secondary'
+}
+
+export enum Enum_Componentpageribbon_Size {
+  Normal = 'normal',
+  Small = 'small'
+}
 
 export enum Enum_Game_Rating {
   Br0 = 'BR0',
@@ -357,7 +464,7 @@ export type GameRelationResponseCollection = {
   data: Array<GameEntity>;
 };
 
-export type GenericMorph = Category | Developer | Game | I18NLocale | Platform | Publisher | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageRibbon | Developer | Game | I18NLocale | Platform | Publisher | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -474,6 +581,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createBanner?: Maybe<BannerEntityResponse>;
   createCategory?: Maybe<CategoryEntityResponse>;
   createDeveloper?: Maybe<DeveloperEntityResponse>;
   createGame?: Maybe<GameEntityResponse>;
@@ -485,6 +593,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteBanner?: Maybe<BannerEntityResponse>;
   deleteCategory?: Maybe<CategoryEntityResponse>;
   deleteDeveloper?: Maybe<DeveloperEntityResponse>;
   deleteGame?: Maybe<GameEntityResponse>;
@@ -507,6 +616,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateBanner?: Maybe<BannerEntityResponse>;
   updateCategory?: Maybe<CategoryEntityResponse>;
   updateDeveloper?: Maybe<DeveloperEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
@@ -527,6 +637,11 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationCreateBannerArgs = {
+  data: BannerInput;
 };
 
 
@@ -572,6 +687,11 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteBannerArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -657,6 +777,12 @@ export type MutationResetPasswordArgs = {
   code: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateBannerArgs = {
+  data: BannerInput;
+  id: Scalars['ID']['input'];
 };
 
 
@@ -857,6 +983,8 @@ export type PublisherInput = {
 
 export type Query = {
   __typename?: 'Query';
+  banner?: Maybe<BannerEntityResponse>;
+  banners?: Maybe<BannerEntityResponseCollection>;
   categories?: Maybe<CategoryEntityResponseCollection>;
   category?: Maybe<CategoryEntityResponse>;
   developer?: Maybe<DeveloperEntityResponse>;
@@ -878,6 +1006,19 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+};
+
+
+export type QueryBannerArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryBannersArgs = {
+  filters?: InputMaybe<BannerFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -1423,6 +1564,11 @@ export type QueryGamesBySlugQueryVariables = Exact<{
 
 export type QueryGamesBySlugQuery = { __typename?: 'Query', games?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, short_description?: string | null, description?: string | null, price: number, rating?: Enum_Game_Rating | null, release_date?: any | null, gallery?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', src: string, label?: string | null } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', src: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null, publisher?: { __typename?: 'PublisherEntityResponse', data?: { __typename?: 'PublisherEntity', attributes?: { __typename?: 'Publisher', name: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', name: string } | null }> } | null, platforms?: { __typename?: 'PlatformRelationResponseCollection', data: Array<{ __typename?: 'PlatformEntity', attributes?: { __typename?: 'Platform', name: string } | null }> } | null } | null }> } | null };
 
+export type QueryHomeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type QueryHomeQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', attributes?: { __typename?: 'Banner', title: string, subtitle: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, button?: { __typename?: 'ComponentPageButton', link: string, label: string } | null, ribbon?: { __typename?: 'ComponentPageRibbon', text?: string | null, color?: Enum_Componentpageribbon_Color | null, size?: Enum_Componentpageribbon_Size | null } | null } | null }> } | null };
+
 
 export const QueryGamesDocument = gql`
     query QueryGames {
@@ -1644,3 +1790,66 @@ export type QueryGamesBySlugQueryHookResult = ReturnType<typeof useQueryGamesByS
 export type QueryGamesBySlugLazyQueryHookResult = ReturnType<typeof useQueryGamesBySlugLazyQuery>;
 export type QueryGamesBySlugSuspenseQueryHookResult = ReturnType<typeof useQueryGamesBySlugSuspenseQuery>;
 export type QueryGamesBySlugQueryResult = Apollo.QueryResult<QueryGamesBySlugQuery, QueryGamesBySlugQueryVariables>;
+export const QueryHomeDocument = gql`
+    query QueryHome {
+  banners {
+    data {
+      attributes {
+        title
+        subtitle
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        button {
+          link
+          label
+        }
+        ribbon {
+          text
+          color
+          size
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useQueryHomeQuery__
+ *
+ * To run a query within a React component, call `useQueryHomeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQueryHomeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQueryHomeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useQueryHomeQuery(baseOptions?: Apollo.QueryHookOptions<QueryHomeQuery, QueryHomeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<QueryHomeQuery, QueryHomeQueryVariables>(QueryHomeDocument, options);
+      }
+export function useQueryHomeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryHomeQuery, QueryHomeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<QueryHomeQuery, QueryHomeQueryVariables>(QueryHomeDocument, options);
+        }
+// @ts-ignore
+export function useQueryHomeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<QueryHomeQuery, QueryHomeQueryVariables>): Apollo.UseSuspenseQueryResult<QueryHomeQuery, QueryHomeQueryVariables>;
+export function useQueryHomeSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryHomeQuery, QueryHomeQueryVariables>): Apollo.UseSuspenseQueryResult<QueryHomeQuery | undefined, QueryHomeQueryVariables>;
+export function useQueryHomeSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryHomeQuery, QueryHomeQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<QueryHomeQuery, QueryHomeQueryVariables>(QueryHomeDocument, options);
+        }
+export type QueryHomeQueryHookResult = ReturnType<typeof useQueryHomeQuery>;
+export type QueryHomeLazyQueryHookResult = ReturnType<typeof useQueryHomeLazyQuery>;
+export type QueryHomeSuspenseQueryHookResult = ReturnType<typeof useQueryHomeSuspenseQuery>;
+export type QueryHomeQueryResult = Apollo.QueryResult<QueryHomeQuery, QueryHomeQueryVariables>;
