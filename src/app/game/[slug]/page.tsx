@@ -179,8 +179,6 @@ async function getGameBySlug(slug: string) {
 export default async function GamePage({ params }: { params: { slug: string } }) {
   const gameData = await getGameBySlug(params.slug)
 
-  // console.log(gameData.attributes.gallery.data.map((image) => image.attributes.src))
-
   // Simula o que antes era o getStaticProps
   const game: GameTemplateProps = {
     cover: `http://localhost:1337${gameData.attributes.cover.data.attributes.src}`,

@@ -40,6 +40,7 @@ const GlobalStyles: ReturnType<
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-decoration: none;
     &::before,
     &::after {
       box-sizing: inherit;
@@ -56,7 +57,7 @@ const GlobalStyles: ReturnType<
       font-size: ${theme.font.sizes.medium};
 
       ${!removeBg &&
-      css`
+    css`
         background-color: ${theme.colors.mainBg};
       `}
     }

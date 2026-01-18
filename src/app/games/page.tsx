@@ -1,11 +1,11 @@
 'use client'
 
+import { useQueryGamesExploreQuery } from "@/graphql/generated"
 import GamesTemplate, { GamesTemplateProps } from "../templates/Games"
 import filterItemsMock from '@/components/ExploreSidebar/mock'
-import { useQueryGamesQuery } from "@/graphql/generated"
 
 export default function GamesPage() {
-  const { data } = useQueryGamesQuery()
+  const { data } = useQueryGamesExploreQuery()
 
   const games =
     data?.games?.data

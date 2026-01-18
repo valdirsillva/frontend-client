@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const ImageBox = styled.a`
+export const ImageBox = styled.div`
   height: 14rem;
   width: 100%;
   background: #f6f7f8;
@@ -44,6 +44,7 @@ export const ImageBox = styled.a`
   );
   background-size: 80rem 14rem;
   animation: placeholderShimmer 1s linear infinite forwards;
+
 
   img {
     width: 100%;

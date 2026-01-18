@@ -52,12 +52,12 @@ const GameCard = ({
     </Link>
 
     <S.Content>
-      <Link href={`/game/${slug}`} passHref>
-        <S.Info>
+      <S.Info>
+        <Link href={`/game/${slug}`} passHref>
           <S.Title>{title}</S.Title>
           <S.Developer>{developer}</S.Developer>
-        </S.Info>
-      </Link>
+        </Link>
+      </S.Info>
 
       <S.FavButton onClick={onFav} role="button">
         {favorite ? (

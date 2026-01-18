@@ -11,13 +11,17 @@ export default function Index() {
     pollInterval: 60000 // 60 segundos (refaz a query automaticamente)
   })
 
+  const banners = data?.banners
+  const newGames = data?.newGames
+  const upcommingGames = data?.upcomingGames
+  const freeGames = data?.freeGames
+
   const pageData = {
-    revalidate: 60,
-    banners: data?.banners?.data.map((banner) => ({
+    banners: banners?.data.map((banner) => ({
       img: `http://localhost:1337${banner.attributes?.image.data?.attributes?.url}`,
       title: banner.attributes?.title,
       subtitle: banner.attributes?.subtitle,
-      buttonLabel: banner.attributes?.button?.label,
+      buttonLabel: banner.attributes?.button?.label ?? 'Buy now',
       buttonLink: banner.attributes?.button?.link,
       ...(banner.attributes?.ribbon && ({
         ribbon: banner.attributes.ribbon.text,
@@ -25,13 +29,32 @@ export default function Index() {
         ribbonSize: banner.attributes.ribbon.size
       }))
     })),
-    newGames: gamesMock,
+    newGames: newGames?.data.map((game) => ({
+      title: game.attributes?.name,
+      slug: game.attributes?.slug,
+      developer: game.attributes?.developers?.data[0].attributes?.name,
+      img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+      price: game.attributes?.price
+    })),
     mostPopularHighlight: highligthMock,
     mostPopularGames: gamesMock,
-    upcommingGames: gamesMock,
+
+    upcommingGames: upcommingGames?.data.map((game) => ({
+      title: game.attributes?.name,
+      slug: game.attributes?.slug,
+      developer: game.attributes?.developers?.data[0].attributes?.name,
+      img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+      price: game.attributes?.price
+    })),
     upcommingHighligth: highligthMock,
     upcommingMoreGames: gamesMock,
-    freeGame: gamesMock,
+    freeGame: freeGames?.data.map((game) => ({
+      title: game.attributes?.name,
+      slug: game.attributes?.slug,
+      developer: game.attributes?.developers?.data[0].attributes?.name,
+      img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+      price: game.attributes?.price
+    })),
     freeHighlight: highligthMock
   } as HomeTemplateProps
 
