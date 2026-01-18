@@ -6,7 +6,6 @@ import highligthMock from '../components/Highlight/mock'
 import { useQueryHomeQuery } from '@/graphql/generated'
 
 export default function Index() {
-
   const { data } = useQueryHomeQuery({
     pollInterval: 60000 // 60 segundos (refaz a query automaticamente)
   })
@@ -15,6 +14,7 @@ export default function Index() {
   const newGames = data?.newGames
   const upcommingGames = data?.upcomingGames
   const freeGames = data?.freeGames
+  const sections = data?.sections
 
   const pageData = {
     banners: banners?.data.map((banner) => ({
@@ -37,8 +37,13 @@ export default function Index() {
       price: game.attributes?.price
     })),
     mostPopularHighlight: highligthMock,
-    mostPopularGames: gamesMock,
-
+    mostPopularGames: sections?.data?.attributes?.popularGames?.games?.data.map((game) => ({
+      title: game.attributes?.name,
+      slug: game.attributes?.slug,
+      developer: game.attributes?.developers?.data[0].attributes?.name,
+      img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+      price: game.attributes?.price
+    })),
     upcommingGames: upcommingGames?.data.map((game) => ({
       title: game.attributes?.name,
       slug: game.attributes?.slug,
