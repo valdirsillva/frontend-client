@@ -2,7 +2,6 @@
 
 import Home, { HomeTemplateProps } from './home'
 import gamesMock from '../components/GameCardSlider/mock'
-import highligthMock from '../components/Highlight/mock'
 import { useQueryHomeQuery } from '@/graphql/generated'
 
 export default function Index() {
@@ -36,7 +35,7 @@ export default function Index() {
       img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
       price: game.attributes?.price
     })),
-    mostPopularHighlight: highligthMock,
+    newGamesTitle: sections?.data?.attributes?.newGames?.title,
     mostPopularGames: sections?.data?.attributes?.popularGames?.games?.data.map((game) => ({
       title: game.attributes?.name,
       slug: game.attributes?.slug,
@@ -44,6 +43,18 @@ export default function Index() {
       img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
       price: game.attributes?.price
     })),
+    mostPopularHighlight: {
+      title: sections?.data?.attributes?.popularGames?.highlight?.title,
+      subtitle: sections?.data?.attributes?.popularGames?.highlight?.subtitle,
+      backgroundImage: `http://localhost:1337${sections?.data?.attributes?.popularGames?.highlight?.background?.data?.attributes?.url}`,
+      floatImage: `http://localhost:1337${sections?.data?.attributes?.popularGames?.highlight?.floatImage?.data[0].attributes?.url}`,
+      alignment: sections?.data?.attributes?.popularGames?.highlight?.alignment as 'right' | 'left' | null,
+      buttonLabel: 'Buy bow',
+      buttonLink: '/games/rdr2',
+    },
+
+    mostPopularGamesTitle: sections?.data?.attributes?.popularGames?.title,
+    upcommingGamesTitle: sections?.data?.attributes?.upcomingGames?.title,
     upcommingGames: upcommingGames?.data.map((game) => ({
       title: game.attributes?.name,
       slug: game.attributes?.slug,
@@ -51,8 +62,17 @@ export default function Index() {
       img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
       price: game.attributes?.price
     })),
-    upcommingHighligth: highligthMock,
+    upcommingHighligth: {
+      title: sections?.data?.attributes?.upcomingGames?.highlight?.title,
+      subtitle: sections?.data?.attributes?.upcomingGames?.highlight?.subtitle,
+      backgroundImage: `http://localhost:1337${sections?.data?.attributes?.upcomingGames?.highlight?.background?.data?.attributes?.url}`,
+      floatImage: `http://localhost:1337${sections?.data?.attributes?.upcomingGames?.highlight?.floatImage?.data[0].attributes?.url}`,
+      alignment: sections?.data?.attributes?.upcomingGames?.highlight?.alignment as 'right' | 'left' | null,
+      buttonLabel: 'Buy bow',
+      buttonLink: '/games/rdr2',
+    },
     upcommingMoreGames: gamesMock,
+    freeGamesTitle: sections?.data?.attributes?.freeGames?.title,
     freeGame: freeGames?.data.map((game) => ({
       title: game.attributes?.name,
       slug: game.attributes?.slug,
@@ -60,7 +80,15 @@ export default function Index() {
       img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
       price: game.attributes?.price
     })),
-    freeHighlight: highligthMock
+    freeHighlight: {
+      title: sections?.data?.attributes?.freeGames?.highlight?.title,
+      subtitle: sections?.data?.attributes?.freeGames?.highlight?.subtitle,
+      backgroundImage: `http://localhost:1337${sections?.data?.attributes?.freeGames?.highlight?.background?.data?.attributes?.url}`,
+      floatImage: `http://localhost:1337${sections?.data?.attributes?.freeGames?.highlight?.floatImage?.data[0].attributes?.url}`,
+      alignment: sections?.data?.attributes?.freeGames?.highlight?.alignment as 'right' | 'left' | null,
+      buttonLabel: 'Buy bow',
+      buttonLink: '/games/rdr2',
+    }
   } as HomeTemplateProps
 
   return <Home {...pageData} />

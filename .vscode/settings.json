@@ -11,4 +11,6 @@
     "typescriptreact"
   ],
   "eslint.alwaysShowStatus": true,
+  "snyk.advanced.organization": "40fb9416-d82a-4338-ae0b-481c207469a9",
+  "snyk.advanced.autoSelectOrganization": true,
 }

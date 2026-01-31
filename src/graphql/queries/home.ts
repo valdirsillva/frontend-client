@@ -52,7 +52,7 @@ export const QUERY_HOME = gql`
           }
 
           popularGames {
-            type
+            title
             highlight {
               ...HighlightFragment
             }
