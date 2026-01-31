@@ -7,7 +7,11 @@ import { bannerMapper, freeGamesMapper, freeHighlightMapper, gamesMapper, mostPo
 
 export default function Index() {
   const { data } = useQueryHomeQuery({
-    pollInterval: 60000 // 60 segundos (refaz a query automaticamente)
+    pollInterval: 60000, // 60 segundos (refaz a query automaticamente)
+    variables: {
+      date: new Date().toISOString().slice(0, 10)
+      // date: '2024-06-01'
+    }
   })
 
   const banners = data?.banners
