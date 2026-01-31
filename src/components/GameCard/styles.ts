@@ -64,6 +64,7 @@ export const ImageBox = styled.div`
 `
 
 export const Info = styled.a`
+  flex: 1;
   max-width: calc(100% - 2.5rem);
   text-decoration: none;
 `
@@ -124,6 +125,7 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
     position: relative;
     height: 100%;
     margin: ${theme.spacings.xsmall};
