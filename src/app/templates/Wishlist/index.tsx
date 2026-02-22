@@ -13,11 +13,12 @@ import Empty from '@/components/Empty'
 
 export type WishlistTemplateProps = {
   games?: GameCardProps[]
+  recommendedTitle?: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 }
 
-const WishlistTemplate = ({ games = [], recommendedGames, recommendedHighlight }: WishlistTemplateProps) => (
+const WishlistTemplate = ({ games = [], recommendedTitle, recommendedGames, recommendedHighlight }: WishlistTemplateProps) => (
   <Base>
     <Container>
       <Heading lineLeft lineColor='secondary'>
@@ -32,7 +33,7 @@ const WishlistTemplate = ({ games = [], recommendedGames, recommendedHighlight }
         </Grid>
       ) : (
         <Empty
-          title='Your wishlist is empty'
+          title={recommendedTitle || 'Your wishlist is empty'}
           description='Games added to your wishlist will appear here'
           hasLink
         />

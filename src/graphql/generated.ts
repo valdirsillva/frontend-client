@@ -213,7 +213,7 @@ export type ComponentPagePopularGames = {
   games?: Maybe<GameRelationResponseCollection>;
   highlight?: Maybe<ComponentPageHighlight>;
   id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -534,7 +534,7 @@ export type GameRelationResponseCollection = {
   data: Array<GameEntity>;
 };
 
-export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | Developer | Game | Home | I18NLocale | Platform | Publisher | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | Developer | Game | Home | I18NLocale | Platform | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Home = {
   __typename?: 'Home';
@@ -700,6 +700,7 @@ export type Mutation = {
   deleteHome?: Maybe<HomeEntityResponse>;
   deletePlatform?: Maybe<PlatformEntityResponse>;
   deletePublisher?: Maybe<PublisherEntityResponse>;
+  deleteRecommended?: Maybe<RecommendedEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Delete an existing role */
@@ -725,6 +726,7 @@ export type Mutation = {
   updateHome?: Maybe<HomeEntityResponse>;
   updatePlatform?: Maybe<PlatformEntityResponse>;
   updatePublisher?: Maybe<PublisherEntityResponse>;
+  updateRecommended?: Maybe<RecommendedEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Update an existing role */
@@ -929,6 +931,11 @@ export type MutationUpdatePublisherArgs = {
 };
 
 
+export type MutationUpdateRecommendedArgs = {
+  data: RecommendedInput;
+};
+
+
 export type MutationUpdateUploadFileArgs = {
   data: UploadFileInput;
   id: Scalars['ID']['input'];
@@ -1106,6 +1113,7 @@ export type Query = {
   platforms?: Maybe<PlatformEntityResponseCollection>;
   publisher?: Maybe<PublisherEntityResponse>;
   publishers?: Maybe<PublisherEntityResponseCollection>;
+  recommended?: Maybe<RecommendedEntityResponse>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -1253,6 +1261,28 @@ export type QueryUsersPermissionsUsersArgs = {
   filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Recommended = {
+  __typename?: 'Recommended';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  section: ComponentPagePopularGames;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RecommendedEntity = {
+  __typename?: 'RecommendedEntity';
+  attributes?: Maybe<Recommended>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type RecommendedEntityResponse = {
+  __typename?: 'RecommendedEntityResponse';
+  data?: Maybe<RecommendedEntity>;
+};
+
+export type RecommendedInput = {
+  section?: InputMaybe<ComponentPagePopularGamesInput>;
 };
 
 export type ResponseCollectionMeta = {
@@ -1683,7 +1713,19 @@ export type QueryHomeQueryVariables = Exact<{
 }>;
 
 
-export type QueryHomeQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', attributes?: { __typename?: 'Banner', title: string, subtitle: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, button?: { __typename?: 'ComponentPageButton', link: string, label: string } | null, ribbon?: { __typename?: 'ComponentPageRibbon', text?: string | null, color?: Enum_Componentpageribbon_Color | null, size?: Enum_Componentpageribbon_Size | null } | null } | null }> } | null, newGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, upcomingGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, freeGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, sections?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', newGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null, popularGames?: { __typename?: 'ComponentPagePopularGames', title: string, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null, games?: { __typename?: 'GameRelationResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null } | null, upcomingGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null, freeGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null } | null } | null } | null };
+export type QueryHomeQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', attributes?: { __typename?: 'Banner', title: string, subtitle: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, button?: { __typename?: 'ComponentPageButton', link: string, label: string } | null, ribbon?: { __typename?: 'ComponentPageRibbon', text?: string | null, color?: Enum_Componentpageribbon_Color | null, size?: Enum_Componentpageribbon_Size | null } | null } | null }> } | null, newGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, upcomingGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, freeGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, sections?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', newGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null, popularGames?: { __typename?: 'ComponentPagePopularGames', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null, games?: { __typename?: 'GameRelationResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null } | null, upcomingGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null, freeGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null } | null } | null } | null };
+
+export type QueryRecommendedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type QueryRecommendedQuery = { __typename?: 'Query', recommended?: { __typename?: 'RecommendedEntityResponse', data?: { __typename?: 'RecommendedEntity', attributes?: { __typename?: 'Recommended', section: { __typename?: 'ComponentPagePopularGames', highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null, games?: { __typename?: 'GameRelationResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null } } | null } | null } | null };
+
+export type QueryUpcomingQueryVariables = Exact<{
+  date: Scalars['Date']['input'];
+}>;
+
+
+export type QueryUpcomingQuery = { __typename?: 'Query', upcomingGames?: { __typename?: 'GameEntityResponseCollection', data: Array<{ __typename?: 'GameEntity', attributes?: { __typename?: 'Game', name: string, slug?: string | null, price: number, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, developers?: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes?: { __typename?: 'Developer', name: string } | null }> } | null } | null }> } | null, showcase?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', upcomingGames?: { __typename?: 'ComponentPageSection', title?: string | null, highlight?: { __typename?: 'ComponentPageHighlight', title: string, subtitle: string, buttonLabel: string, buttonLink: string, alignment?: Enum_Componentpagehighlight_Alignment | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, floatImage?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null }> } | null } | null } | null } | null } | null } | null };
 
 export const BannerFragmentFragmentDoc = gql`
     fragment BannerFragment on BannerEntity {
@@ -2022,3 +2064,121 @@ export type QueryHomeQueryHookResult = ReturnType<typeof useQueryHomeQuery>;
 export type QueryHomeLazyQueryHookResult = ReturnType<typeof useQueryHomeLazyQuery>;
 export type QueryHomeSuspenseQueryHookResult = ReturnType<typeof useQueryHomeSuspenseQuery>;
 export type QueryHomeQueryResult = Apollo.QueryResult<QueryHomeQuery, QueryHomeQueryVariables>;
+export const QueryRecommendedDocument = gql`
+    query QueryRecommended {
+  recommended {
+    data {
+      attributes {
+        section {
+          highlight {
+            ...HighlightFragment
+          }
+          games {
+            data {
+              ...GameFragment
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    ${HighlightFragmentFragmentDoc}
+${GameFragmentFragmentDoc}`;
+
+/**
+ * __useQueryRecommendedQuery__
+ *
+ * To run a query within a React component, call `useQueryRecommendedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQueryRecommendedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQueryRecommendedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useQueryRecommendedQuery(baseOptions?: Apollo.QueryHookOptions<QueryRecommendedQuery, QueryRecommendedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<QueryRecommendedQuery, QueryRecommendedQueryVariables>(QueryRecommendedDocument, options);
+      }
+export function useQueryRecommendedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryRecommendedQuery, QueryRecommendedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<QueryRecommendedQuery, QueryRecommendedQueryVariables>(QueryRecommendedDocument, options);
+        }
+// @ts-ignore
+export function useQueryRecommendedSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<QueryRecommendedQuery, QueryRecommendedQueryVariables>): Apollo.UseSuspenseQueryResult<QueryRecommendedQuery, QueryRecommendedQueryVariables>;
+export function useQueryRecommendedSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryRecommendedQuery, QueryRecommendedQueryVariables>): Apollo.UseSuspenseQueryResult<QueryRecommendedQuery | undefined, QueryRecommendedQueryVariables>;
+export function useQueryRecommendedSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryRecommendedQuery, QueryRecommendedQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<QueryRecommendedQuery, QueryRecommendedQueryVariables>(QueryRecommendedDocument, options);
+        }
+export type QueryRecommendedQueryHookResult = ReturnType<typeof useQueryRecommendedQuery>;
+export type QueryRecommendedLazyQueryHookResult = ReturnType<typeof useQueryRecommendedLazyQuery>;
+export type QueryRecommendedSuspenseQueryHookResult = ReturnType<typeof useQueryRecommendedSuspenseQuery>;
+export type QueryRecommendedQueryResult = Apollo.QueryResult<QueryRecommendedQuery, QueryRecommendedQueryVariables>;
+export const QueryUpcomingDocument = gql`
+    query QueryUpcoming($date: Date!) {
+  upcomingGames: games(
+    filters: {release_date: {gt: $date}}
+    sort: ["release_date:asc"]
+    pagination: {limit: 8}
+  ) {
+    data {
+      ...GameFragment
+    }
+  }
+  showcase: home {
+    data {
+      attributes {
+        upcomingGames {
+          title
+          highlight {
+            ...HighlightFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${GameFragmentFragmentDoc}
+${HighlightFragmentFragmentDoc}`;
+
+/**
+ * __useQueryUpcomingQuery__
+ *
+ * To run a query within a React component, call `useQueryUpcomingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQueryUpcomingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQueryUpcomingQuery({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useQueryUpcomingQuery(baseOptions: Apollo.QueryHookOptions<QueryUpcomingQuery, QueryUpcomingQueryVariables> & ({ variables: QueryUpcomingQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<QueryUpcomingQuery, QueryUpcomingQueryVariables>(QueryUpcomingDocument, options);
+      }
+export function useQueryUpcomingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryUpcomingQuery, QueryUpcomingQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<QueryUpcomingQuery, QueryUpcomingQueryVariables>(QueryUpcomingDocument, options);
+        }
+// @ts-ignore
+export function useQueryUpcomingSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<QueryUpcomingQuery, QueryUpcomingQueryVariables>): Apollo.UseSuspenseQueryResult<QueryUpcomingQuery, QueryUpcomingQueryVariables>;
+export function useQueryUpcomingSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryUpcomingQuery, QueryUpcomingQueryVariables>): Apollo.UseSuspenseQueryResult<QueryUpcomingQuery | undefined, QueryUpcomingQueryVariables>;
+export function useQueryUpcomingSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<QueryUpcomingQuery, QueryUpcomingQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<QueryUpcomingQuery, QueryUpcomingQueryVariables>(QueryUpcomingDocument, options);
+        }
+export type QueryUpcomingQueryHookResult = ReturnType<typeof useQueryUpcomingQuery>;
+export type QueryUpcomingLazyQueryHookResult = ReturnType<typeof useQueryUpcomingLazyQuery>;
+export type QueryUpcomingSuspenseQueryHookResult = ReturnType<typeof useQueryUpcomingSuspenseQuery>;
+export type QueryUpcomingQueryResult = Apollo.QueryResult<QueryUpcomingQuery, QueryUpcomingQueryVariables>;

@@ -1,4 +1,6 @@
-import { QueryHomeQuery } from "@/graphql/generated"
+import { GameCardProps } from "@/components/GameCard"
+import { HighlightProps } from "@/components/Highlight"
+import { QueryHomeQuery, QueryRecommendedQuery } from "@/graphql/generated"
 
 export const bannerMapper = (banners: QueryHomeQuery['banners']) => {
   return banners && banners.data.map((banner) => ({
@@ -25,6 +27,57 @@ export const gamesMapper = (games: QueryHomeQuery['newGames'] | null | undefined
   }))
 }
 
+
+export const recommendedGamesMapper = (
+  section: any
+): GameCardProps[] => {
+  const games = section?.games?.data
+
+  if (!games) return []
+
+  return games.map((game: any) => ({
+    title: game.attributes?.name ?? '',
+    slug: game.attributes?.slug ?? undefined,
+    developer:
+      game.attributes?.developers?.data?.[0]?.attributes?.name ?? '',
+    img: game.attributes?.cover?.data?.attributes?.url
+      ? `http://localhost:1337${game.attributes.cover.data.attributes.url}`
+      : '',
+    price: game.attributes?.price ?? 0
+  }))
+}
+
+export const recommendedHighlightMapper = (games: QueryRecommendedQuery['recommended'] | null | undefined): HighlightProps => {
+  const highlight = games?.data?.attributes?.section?.highlight
+
+  if (!highlight) {
+    return {
+      title: '',
+      subtitle: '',
+      backgroundImage: '',
+      buttonLabel: '',
+      buttonLink: '',
+    }
+  }
+
+  const floatImageUrl =
+    highlight?.floatImage?.data?.[0]?.attributes?.url
+      ? `http://localhost:1337${highlight.floatImage.data[0].attributes.url}`
+      : undefined
+
+  return highlight && {
+    title: highlight.title ?? '',
+    subtitle: highlight.subtitle ?? '',
+    backgroundImage: highlight.background?.data?.attributes?.url
+      ? `http://localhost:1337${highlight.background.data.attributes.url}`
+      : '',
+    floatImage: floatImageUrl,
+    alignment: highlight.alignment as 'right' | 'left' | undefined,
+    buttonLabel: highlight.buttonLabel ?? 'Buy now',
+    buttonLink: highlight.buttonLink ?? '/games/rdr2',
+  }
+
+}
 export const mostPopularGamesMapper = (sections: QueryHomeQuery['sections'] | null | undefined) => {
   return sections && sections?.data?.attributes?.popularGames?.games?.data.map((game) => ({
     title: game.attributes?.name,
@@ -56,7 +109,7 @@ export const upcomingGamesMapper = (games: QueryHomeQuery['upcomingGames'] | nul
     slug: game.attributes?.slug,
     developer: game.attributes?.developers?.data[0].attributes?.name,
     img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
-    price: game.attributes?.price
+    price: game.attributes?.price,
   }))
 }
 

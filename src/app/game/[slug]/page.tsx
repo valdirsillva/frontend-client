@@ -2,6 +2,8 @@
 import GameComponent, { GameTemplateProps } from '../../templates/Game'
 import gamesMock from '@/components/GameCardSlider/mock'
 import highlightMock from '@/components/Highlight/mock'
+import { gamesMapper, recommendedGamesMapper, upcomingGamesMapper } from '@/utils/mappers'
+
 
 interface GalleryImage {
   attributes: {
@@ -83,6 +85,7 @@ query QueryGamesExplore($limit: Int) {
   }
 }
 `
+
 
 export async function generateStaticParams() {
   const response = await fetch('http://localhost:1337/graphql', {
@@ -176,9 +179,177 @@ async function getGameBySlug(slug: string) {
   return json.data.games.data[0]
 }
 
+async function getRecommendedGames() {
+  const response = await fetch('http://localhost:1337/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `
+        query QueryRecommended {
+          recommended {
+            data {
+              attributes {
+                section {
+                  highlight {
+                    ...HighlightFragment
+                  }
+                  games {
+                    data {
+                      ...GameFragment
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        fragment HighlightFragment on ComponentPageHighlight {
+          title
+          subtitle
+          background {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          floatImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          buttonLabel
+          buttonLink
+          alignment
+        }
+
+        fragment GameFragment on GameEntity {
+          attributes {
+            name
+            slug
+            price
+
+            cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+
+            developers {
+              data {
+                attributes {
+                  name
+                }
+              }
+            }
+          }
+        }
+      `
+    })
+  })
+  const { data } = await response.json()
+  return data?.recommended?.data?.attributes?.section
+}
+
+async function getUpcommingGames() {
+  const response = await fetch('http://localhost:1337/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `
+         query QueryUpcoming ($date: Date!) {
+            upcomingGames: games(
+              filters: { release_date: { gt: $date } } 
+              sort: ["release_date:asc"]
+              pagination: { limit: 8 }
+            ) {
+              data {
+                ...GameFragment
+              }
+            }
+
+          showcase: home {
+            data {
+              attributes {
+                upcomingGames {
+                  title
+                  highlight {
+                    ...HighlightFragment
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        fragment HighlightFragment on ComponentPageHighlight {
+            title
+            subtitle
+            background {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+            floatImage {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+            buttonLabel
+            buttonLink
+            alignment
+          }
+
+          fragment GameFragment on GameEntity {
+            attributes {
+              name
+              slug
+              price
+              cover {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              developers {
+                data {
+                  attributes {
+                    name
+                  }
+                }
+              }
+            }
+          }
+      `,
+      variables: {
+        // date: new Date().toISOString().slice(0, 10)
+        date: "2025-01-01"
+      }
+    })
+  })
+  const data = await response.json()
+  // output = undefined
+  return data || []
+}
+
 export default async function GamePage({ params }: { params: { slug: string } }) {
   const gameData = await getGameBySlug(params.slug)
-
+  const gamesRecommended = await getRecommendedGames()
+  const { data } = await getUpcommingGames()
   // Simula o que antes era o getStaticProps
   const game: GameTemplateProps = {
     cover: `http://localhost:1337${gameData.attributes.cover.data.attributes.src}`,
@@ -202,9 +373,17 @@ export default async function GamePage({ params }: { params: { slug: string } })
       rating: gameData.attributes.rating,
       genres: gameData.attributes.categories.data.map((category: Category) => category.attributes.name)
     },
-    upcomingGames: gamesMock,
+    upcomingGames: data.upcomingGames?.data.map((game: Game) => ({
+      title: game.attributes.name,
+      slug: game.attributes.slug,
+      developer: game.attributes.developers.data[0].attributes.name,
+      img: `http://localhost:1337${game?.attributes?.cover?.data?.attributes?.url}`,
+      price: game.attributes.price
+    })),
     upcomingHighlight: highlightMock,
-    recommendedGames: gamesMock
+    upcomingTitle: data.showcase?.data?.attributes?.upcomingGames?.title || 'Upcoming Games',
+    recommendedTitle: data.showcase?.data?.attributes?.upcomingGames?.title || 'You may like these games1',
+    recommendedGames: recommendedGamesMapper(gamesRecommended)
   }
 
   // O componente recebe os dados direto
