@@ -2,12 +2,11 @@
 import * as S from "./styles"
 import Base from '../base'
 import { Grid } from '@/components/Grid'
-import { useQuery } from '@apollo/client'
-import { QUERY_GAMES } from '@/graphql/queries/games'
-import ExploreSidebar, { ItemProps } from '@/components/ExploreSidebar'
 import GameCard, { GameCardProps } from '@/components/GameCard'
+import ExploreSidebar, { ItemProps } from '@/components/ExploreSidebar'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
 import Loading from "@/components/Loading"
+import { useQueryGames } from "@/graphql/queries/games"
 
 export type GamesTemplateProps = {
   games?: GameCardProps[]
@@ -15,13 +14,7 @@ export type GamesTemplateProps = {
 }
 
 const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
-  const { data, loading, fetchMore } = useQuery(QUERY_GAMES, {
-    variables: {
-      start: 0,
-      limit: 15,
-    },
-    notifyOnNetworkStatusChange: true
-  })
+  const { data, loading, fetchMore } = useQueryGames({ variables: { limit: 15 } })
 
   const handleFilter = () => {
     return
