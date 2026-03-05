@@ -1,6 +1,6 @@
 schema: http://localhost:1337/graphql
 documents: 
-  - src/graphql/**/*.ts
+  - "src/**/*.{ts,tsx}"
   - "!src/graphql/generated.ts"
 generates:
   src/graphql/generated.ts:

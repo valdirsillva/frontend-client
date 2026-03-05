@@ -1,20 +1,41 @@
 'use client'
-import ExploreSidebar, { ItemProps } from '@/components/ExploreSidebar'
-import GameCard, { GameCardProps } from '@/components/GameCard'
 import * as S from "./styles"
 import Base from '../base'
 import { Grid } from '@/components/Grid'
+import { useQuery } from '@apollo/client'
+import { QUERY_GAMES } from '@/graphql/queries/games'
+import ExploreSidebar, { ItemProps } from '@/components/ExploreSidebar'
+import GameCard, { GameCardProps } from '@/components/GameCard'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
+import Loading from "@/components/Loading"
 
 export type GamesTemplateProps = {
   games?: GameCardProps[]
   filterItems: ItemProps[]
 }
-const GamesTemplate = ({ filterItems, games = [] }: GamesTemplateProps) => {
+
+const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
+  const { data, loading, fetchMore } = useQuery(QUERY_GAMES, {
+    variables: {
+      start: 0,
+      limit: 15,
+    },
+    notifyOnNetworkStatusChange: true
+  })
+
+  const handleFilter = () => {
+    return
+  }
 
   const handleShowMore = () => {
-    console.log('show more')
+    fetchMore({
+      variables: {
+        start: data?.games?.data.length || 0,
+        limit: 15
+      }
+    })
   }
+
   return (
     <Base>
       <S.Main>
@@ -22,22 +43,26 @@ const GamesTemplate = ({ filterItems, games = [] }: GamesTemplateProps) => {
           items={filterItems}
           onFilter={() => console.log('filter')}
         />
+        {loading ? <Loading /> : (
+          <section>
+            <Grid>
+              {data?.games?.data.map((game) => (
+                <GameCard
+                  key={game.attributes?.slug}
+                  title={game.attributes?.name ?? 'Unknown'}
+                  developer={game.attributes?.developers?.data?.[0]?.attributes?.name ?? 'Unknown'}
+                  img={`http://localhost:1337${game.attributes?.cover?.data?.attributes?.url ?? '/img/placeholder.png'}`}
+                  price={game.attributes?.price ?? 0}
+                />
+              ))}
+            </Grid>
 
-        <section>
-          <Grid>
-            {games.map((game) => (
-              <GameCard
-                key={game.title}
-                {...game}
-              />
-            ))}
-          </Grid>
-
-          <S.ShowMore role="button" onClick={handleShowMore}>
-            <p>Show more</p>
-            <ArrowDown size={35} />
-          </S.ShowMore>
-        </section>
+            <S.ShowMore role="button" onClick={handleShowMore}>
+              <p>Show more</p>
+              <ArrowDown size={35} />
+            </S.ShowMore>
+          </section>
+        )}
       </S.Main>
     </Base>
   )

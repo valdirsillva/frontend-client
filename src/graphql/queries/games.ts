@@ -1,33 +1,33 @@
 import { gql } from '@apollo/client'
 
 export const QUERY_GAMES = gql`     
-      query QueryGamesExplore($limit: Int) {
-        games(pagination: { limit: $limit }) {
-          data {
-            attributes {
-              name 
-              slug 
-              price 
+  query QueryGamesExplore($limit: Int, $start: Int) {
+    games(pagination: { limit: $limit, start: $start }) {
+      data {
+        attributes {
+          name 
+          slug 
+          price 
 
-              cover {
-                data {
-                  attributes {
-                    url
-                  }
-                }
+          cover {
+            data {
+              attributes {
+                url
               }
+            }
+          }
 
-              developers {
-                data {
-                  attributes {
-                    name
-                  }
-                }
+          developers {
+            data {
+              attributes {
+                name
               }
             }
           }
         }
       }
+    }
+  }
 `
 
 // No Strapi 4, o argumento where n ão existe mais no GraphQL.

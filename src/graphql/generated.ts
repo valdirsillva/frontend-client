@@ -1696,6 +1696,7 @@ export type HighlightFragmentFragment = { __typename?: 'ComponentPageHighlight',
 
 export type QueryGamesExploreQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -1798,8 +1799,8 @@ export const HighlightFragmentFragmentDoc = gql`
 }
     `;
 export const QueryGamesExploreDocument = gql`
-    query QueryGamesExplore($limit: Int) {
-  games(pagination: {limit: $limit}) {
+    query QueryGamesExplore($limit: Int, $start: Int) {
+  games(pagination: {limit: $limit, start: $start}) {
     data {
       attributes {
         name
@@ -1838,6 +1839,7 @@ export const QueryGamesExploreDocument = gql`
  * const { data, loading, error } = useQueryGamesExploreQuery({
  *   variables: {
  *      limit: // value for 'limit'
+ *      start: // value for 'start'
  *   },
  * });
  */

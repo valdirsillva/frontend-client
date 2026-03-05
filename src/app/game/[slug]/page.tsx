@@ -1,9 +1,7 @@
 
 import GameComponent, { GameTemplateProps } from '../../templates/Game'
-import gamesMock from '@/components/GameCardSlider/mock'
 import highlightMock from '@/components/Highlight/mock'
-import { gamesMapper, recommendedGamesMapper, upcomingGamesMapper } from '@/utils/mappers'
-
+import { recommendedGamesMapper } from '@/utils/mappers'
 
 interface GalleryImage {
   attributes: {
