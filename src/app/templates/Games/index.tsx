@@ -8,6 +8,7 @@ import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
 import Loading from "@/components/Loading"
 import { useQueryGames } from "@/graphql/queries/games"
 
+
 export type GamesTemplateProps = {
   games?: GameCardProps[]
   filterItems: ItemProps[]
