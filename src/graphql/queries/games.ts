@@ -3,9 +3,10 @@ import { useQuery } from '@apollo/client'
 import { QUERY_GAMES as QueryGames } from '@/graphql/queries/games'
 import { GamesQueryData, GamesQueryVariables } from '@/graphql/types/game'
 
+
 export const QUERY_GAMES = gql`     
-  query QueryGamesExplore($limit: Int, $start: Int) {
-    games(pagination: { limit: $limit, start: $start }) {
+  query QueryGamesExplore($limit: Int, $start: Int, $filters: GameFiltersInput, $sort: [String]) {
+    games(pagination: { limit: $limit, start: $start }, filters: $filters, sort: $sort) {
       data {
         attributes {
           name 

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
-import { BannerFragment } from '../fragments/banner.graphql'
-import { GameFragment } from '../fragments/game.graphql'
+import { BannerFragment } from '../fragments/banner'
+import { GameFragment } from '../fragments/game'
 import { HighlightFragment } from '../fragments/highlight'
 
 export const QUERY_HOME = gql`
