@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import { renderWithTheme } from '@/utils/tests/helpers'
 import userEvent from '@testing-library/user-event'
 
@@ -9,7 +9,7 @@ describe('<Dropdown />', () => {
     const title = <h1 aria-label="toogle dropdown">Click here</h1>
 
     renderWithTheme(
-      <Dropdown title={title}>
+      <Dropdown title={title} >
         <span>content</span>
       </Dropdown>
     )
@@ -19,15 +19,25 @@ describe('<Dropdown />', () => {
     expect(screen.getByLabelText(/toogle dropdown/)).toBeInTheDocument()
   })
 
-  it('should handle open/close dropdown', async () => {
+  it('should handle open/close dropdown when clicking on overlay', async () => {
     const content = screen.getByText(/content/).parentElement!
+    const overlay = content.nextElementSibling
 
-    expect(content).toHaveStyle({ opacity: 0 })
-    expect(content.getAttribute('aria-hidden')).toBe('true')
+    // Estado inicial
+    expect(overlay?.getAttribute('aria-hidden')).toBe('true')
 
-    await userEvent.click(screen.getByLabelText(/toogle dropdown/))
+    // Abre o dropdown
+    await userEvent.click(screen.getByLabelText(/toogle dropdown/i))
 
-    expect(content).toHaveStyle({ opacity: 1 })
-    expect(content.getAttribute('aria-hidden')).toBe('false')
+    await waitFor(() =>
+      expect(overlay?.getAttribute('aria-hidden')).toBe('false')
+    )
+
+    // Fecha clicando no overlay
+    await userEvent.click(overlay!)
+
+    await waitFor(() =>
+      expect(overlay?.getAttribute('aria-hidden')).toBe('true')
+    )
   })
 })

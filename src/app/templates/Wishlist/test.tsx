@@ -33,12 +33,11 @@ describe('<Wishlist />', () => {
   it('should render empty when there are no games', () => {
     renderWithTheme(
       <WishlistTemplate
-        recommendedTitle='You may like these games'
-        recommendedGames={gamesMock}
+        recommendedGames={[]}
         recommendedHighlight={highlightMock}
       />
     )
     expect(screen.queryByText(/population zero/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /your wishlist is empty/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Your wishlist is empty/i })).toBeInTheDocument()
   })
 })

@@ -10,7 +10,7 @@ describe('<ExporerSidebar />', () => {
 
     expect(screen.getByRole('heading', { name: /price/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /sort by/i })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /system/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /platforms/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /genre/i })).toBeInTheDocument()
   })
 
@@ -32,7 +32,7 @@ describe('<ExporerSidebar />', () => {
       <ExporerSidebar
         items={items}
         onFilter={jest.fn()}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
       />
     )
     // Espero que o Checkbox esteja marcado
@@ -47,14 +47,14 @@ describe('<ExporerSidebar />', () => {
     renderWithTheme(
       <ExporerSidebar
         items={items}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
         onFilter={onFilter}
       />
     )
 
     await userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
-    expect(onFilter).toHaveBeenCalledWith({ windows: true, sort_by: 'low-to-high' })
+    expect(onFilter).toHaveBeenCalledWith({ platforms: ['windows'], sort_by: 'low-to-high' })
   })
 
   it('should filter with checked values', async () => {
@@ -74,8 +74,7 @@ describe('<ExporerSidebar />', () => {
     await userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(onFilter).toHaveBeenCalledWith({
-      windows: true,
-      linux: true,
+      platforms: ['windows', 'linux'],
       sort_by: 'low-to-high'
     })
   })

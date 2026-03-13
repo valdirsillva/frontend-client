@@ -39,11 +39,6 @@ const Menu = ({ username }: MenuProps) => {
           <Link href="/games">
             <S.MenuLink>Explore</S.MenuLink>
           </Link>
-          {!!username && (
-            <Fragment>
-              <S.MenuLink href="#">Wishlist</S.MenuLink>
-            </Fragment>
-          )}
         </S.MenuNav>
       </MediaMatch>
 
